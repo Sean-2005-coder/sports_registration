@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+
+{% block content %}
+    <h1>用户登录</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('login') }}" method="post">
+        <input type="text" name="username" placeholder="用户名" required autofocus>
+        <input type="email" name="email" placeholder="邮箱" required>
+        <input type="password" name="password" placeholder="密码" required>
+        <button type="submit">登录</button>
+    </form>
+    <p><a href="{{ url_for('register') }}">注册新用户</a></p>
+{% endblock content %}
+
+

@@ -1,0 +1,37 @@
+{% extends "template.html" %}
+    
+{% block content %}
+    <h1>Registered Users</h1>
+
+
+    <table>
+        <thead>   <!--定义表头-->
+            <tr>  <!--定义表格行-->
+                <th>Username</th>
+                <th>Email</th>
+                <th>Sport</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody>  <!--定义表格主体-->
+            {% for registrant in registrants %}
+                <tr>
+                    <td>{{ registrant.username }}</td>
+                    <td>{{ registrant.email }}</td>
+                    <td>{{ registrant.sport }}</td>
+                    <td>{{ registrant.gender }}</td>
+                    <td>
+                        <form method="post" action="/deregistrant/{{ registrant.id }}">  <!--添加一个表单，提交到/deregistrant/<id>路由，删除对应的注册用户-->
+                        <input name="id" type="text" value="{{ registrant.id }}" hidden>  <!--隐藏输入框，传递注册用户的id-->
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No registered users yet.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

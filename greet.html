@@ -1,0 +1,13 @@
+{% extends "template.html" %}
+
+{% block content %}
+    <h1>登录成功</h1>
+    <p>用户名：{{ registrant.username }}</p>
+    <p>邮箱：{{ registrant.email }}</p>
+    <p>体育项目：{{ registrant.sport }}</p>
+    <p>性别：{{ registrant.gender }}</p>
+    <p><a href="{{ url_for('registrants') }}">查看其他用户报名的体育项目和性别</a></p>
+    <form action="{{ url_for('logout') }}" method="post">
+        <button type="submit">退出登录</button>
+    </form>
+{% endblock content %}

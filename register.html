@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+
+{% block content %}
+    {% if registered %}
+        <h1>注册成功</h1>
+        <p>欢迎你，{{ username }}！</p>
+        <p><a href="{{ url_for('registrants') }}">查看其他用户报名的体育项目和性别</a></p>
+        <p><a href="{{ url_for('index') }}">返回登录</a></p>
+    {% else %}
+        <h1>注册用户</h1>
+        <form action="{{ url_for('register') }}" method="post">
+            <input type="text" name="username" placeholder="用户名" required autofocus>
+            <input type="email" name="email" placeholder="邮箱" required>
+            <input type="password" name="password" placeholder="密码" required>
+
+            <h2>选择体育项目</h2>
+            {% for sport in sports %}
+                <label><input type="checkbox" name="sport" value="{{ sport }}"> {{ sport }}</label>
+            {% endfor %}
+
+            <h2>选择性别</h2>
+            {% for gender in genders %}
+                <label><input type="radio" name="gender" value="{{ gender }}" required> {{ gender }}</label>
+            {% endfor %}
+            <button type="submit">注册</button>
+        </form>
+        <p><a href="{{ url_for('index') }}">返回登录</a></p>
+    {% endif %}
+{% endblock content %}
